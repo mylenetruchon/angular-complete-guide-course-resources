@@ -1,53 +1,27 @@
-# Angular - The Complete Guide Course Resources
+# Essentials
 
-This repository contains resources (code snapshots, extra files & slides) for my [Angular - The Complete Guide](https://acad.link/angular) online course.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.2.
 
-## How To Use
+## Development server
 
-This repository contains the course slides and top-level [code-snapshots](/code-snapshots/) and [attachments](/attachments/) folders.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-The [code-snapshots](/code-snapshots/) folder contains multiple code snapshots per course section - these snapshots should help you with debugging you course projects when following along with the course code.
+## Code scaffolding
 
-The [attachments](/attachments/) folder contains lecture-specific attachments which I reference in some of the course lectures.
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Using Code Snapshots
+## Build
 
-Code snapshots are complete Angular projects, provided for you to compare your code to mine. You will often find multiple snapshots for every course section, to reflect **different project states at different points of time**.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-The snapshots are stored in folders which carry names that should allow you to infer to which course lecture the snapshot belongs.
+## Running unit tests
 
-You can use these code snapshots (even without downloading the code to your machine, especially when using [this GitHub feature](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor#opening-the-githubdev-editor)) to compare your code to mine.
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-You can also download the entire repository to your machine via the green "Code" button or by [cloning](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) it. Once downloaded, you can browse all snapshots locally on your machine.
+## Running end-to-end tests
 
-## Running the Code Snapshots
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-As mentioned, the code snapshots provided in this repository are complete Angular projects. Their main purpose is to allow you to compare your code to mine (see [above](#using-code-snapshots)).
+## Further help
 
-But once you downloaded them you can also run the code snapshots on your machine. To do this, you must perform the following steps:
-
-### 1) Install dependencies
-
-First, you must re-create the `node_modules` folder and install all required third-party dependencies.
-
-This is done via the following command:
-
-```shell
-npm install
-```
-
-**Important:** You must be navigated into the project folder (inside your terminal / command prompt) before running this command.
-
-### 2) Run the development server
-
-As a next step, you can start the development server via
-
-```shell
-npm start
-```
-
-or 
-
-```shell
-ng serve
-```
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
