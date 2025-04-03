@@ -1,0 +1,10 @@
+<div>
+  <!-- write the name of the event you want to listen to between parenthesis -->
+  <button (click)="selectUser()">
+    <!-- we could still use string interpolation ({{}}) as the url value, but this is not the preferred way -->
+    <!-- we prefer property binding (usage of []) -->
+    <!-- for computed properties, getters are often the way to go -->
+    <img [src]="imagePath()" [alt]="selectedUser().name" />
+    <span>{{ selectedUser().name }}</span>
+  </button>
+</div>
