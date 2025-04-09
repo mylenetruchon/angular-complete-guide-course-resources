@@ -17,12 +17,12 @@ import {TasksComponent} from "./tasks/tasks.component";
 })
 export class AppComponent {
   users = signal(DUMMY_USERS);
-  selectedUserId = DUMMY_USERS[0].id;
+  selectedUserId = signal(DUMMY_USERS[0].id);
 
   selectedUser =
-    computed<{ id: string; name: string; avatar: string; }>(() => DUMMY_USERS.find(user => user.id === this.selectedUserId)!)
+    computed<{ id: string; name: string; avatar: string; }>(() => DUMMY_USERS.find(user => user.id === this.selectedUserId())!)
 
   selectUser(id: string) {
-    this.selectedUserId = DUMMY_USERS.find(user => user.id === id)!.id;
+    this.selectedUserId.set(DUMMY_USERS.find(user => user.id === id)!.id);
   }
 }
