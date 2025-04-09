@@ -1,9 +1,32 @@
-<app-header />
+<app-header></app-header>
 
 <main>
   <ul id="users">
     <li>
-      <app-user />
+      <app-user
+        [id]="users()[0].id"
+        [avatar]="users()[0].avatar"
+        [name]="users()[0].name"
+        (select)="selectUser($event)"></app-user>
+      <!-- $event variable is not just available when working with custom events, it also is with built-in events like click -->
+    </li>
+    <li>
+      <app-user
+        [id]="users()[1].id"
+        [avatar]="users()[1].avatar"
+        [name]="users()[1].name"
+        (select)="selectUser($event)"></app-user>
+      <!-- $event variable is not just available when working with custom events, it also is with built-in events like click -->
+    </li>
+    <li>
+      <app-user
+        [id]="users()[2].id"
+        [avatar]="users()[2].avatar"
+        [name]="users()[2].name"
+        (select)="selectUser($event)"></app-user>
+      <!-- $event variable is not just available when working with custom events, it also is with built-in events like click -->
     </li>
   </ul>
+
+  <app-tasks [username]="this.selectedUser" />
 </main>

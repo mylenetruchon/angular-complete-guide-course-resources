@@ -1,7 +1,4 @@
-import {Component, computed, signal} from '@angular/core';
-import {DUMMY_USERS} from "../dummy-users";
-
-const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
+import {Component, computed, EventEmitter, Input, input, Output, output} from '@angular/core';
 
 @Component({
   selector: 'app-user',
@@ -11,37 +8,33 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
   standalone: true
 })
 export class UserComponent {
-  // Since Angular 2, this is how we deal with state (see signal for other method below)
-  // this is a variable, no need to use the keyword let or const
-  // we can now access this property inside the html code (in the template)
-  // private selectedUser would make it not available in the template
-  exampleState = "this state is just for example"
+  // INPUTS
+  // older method: component properties are called inputs
+  // without ! - TS2564: Property 'avatar' has no initializer and is not definitely assigned in the constructor.
+  // however, ! is for TypeScript, but without the required option, Angular does not enforce to pass a value to this input
+  @Input({required: true}) name!: string;
 
-  // Since Angular 16: we can deal with state via signals as well (stable since Angular 17)
-  // when the value is changed, Angular is notified (it then rerenders everywhere the value is used)
-  // we can pass an initial value to the signal() method
-  selectedUser = signal(DUMMY_USERS[randomIndex]);
+  // newer method: you can also use the Signal to set inputs (InputSignal)
+  // you can assign a default initial value, which will determine the type (eg: input(""))
+  // else, you can use the generics input<string> if you don't set an initial value
+  // finally there is still the possibility to set the input as required (but then you can't set initial default value)
+  // from outside the component (the parent), it does not affect how to pass an input
+  avatar = input.required<string>();
+  id = input.required<string>();
 
-  // getter for a computed property (without Signal)
-  // it is called like this in the template: <img [src]="imagePath" />
-  get imagePathWithoutSignal() {
-    return "assets/users/" + this.selectedUser().avatar;
-  }
+  // as the avatar input is a Signal, it must be called as a Signal (avatar() instead of avatar)
+  // also, as avatar is a Signal, we should use the computed method instead of a getter to be more efficient
+  imagePath = computed(() => "assets/users/" + this.avatar());
 
-  // now, with Signal, we instead use the computed method
-  // when reading this value, Signal creates a subscription to selectedUser
-  // and it will recompute the value of imagePath only if selectedUser changes (instead of if any value of the component changes)
-  // since it is a Signal, it is called like this in the template: <img [src]="imagePath()" />
-  imagePath = computed(() => "assets/users/" + this.selectedUser().avatar);
+  // OUTPUTS
+  // older version, the most common one
+  @Output() select = new EventEmitter<string>();
+  // modern version, less common
+  // there is not real advantage, apart that you won't have decorators anymore and it is a bit more concise
+  modernSelect = output<string>() // no need to explicitly create an EventEmitter
 
-  selectUser() {
-    // Traditional state: Angular detects the state changes,
-    // because an event (click) occurred, when it changes (via zone.js), it supposes where it has changed and it rerenders the UI
-    // if a state is declared this way, how to use it in the template: <span>{{ selectedUser.name }}</span>
-    this.exampleState = "this his how to change the value of traditional state"
-
-    const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
-    // signal is more efficient as you subscribe (with selectedUser()) and we don't need to check multiple irrelevant components
-    this.selectedUser.set(DUMMY_USERS[randomIndex]);
+  onSelectUser() {
+    this.select.emit(this.id());
+    this.modernSelect.emit(this.id())
   }
 }
